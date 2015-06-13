@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hashorse Dev</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Hashorse</h1>
+    <p class="lead">Parser for Hashnotes</p>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Input</h3>
+      </div>
+      <div class="panel-body">
+        <form id="inputForm">
+          <div class="form-group">
+            <label for="inputMain">Note:</label>
+            <input type="text" id="inputMain" class="form-control" placeholder="Type note here ..." autocomplete="off">
+          </div>
+          <button type="submit" class="btn btn-default">Add note</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Output</h3>
+      </div>
+      <div id="outputMain" class="panel-body">
+        
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="hashorse.js"></script>
+</body>
+</html>
