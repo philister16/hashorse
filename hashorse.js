@@ -12,42 +12,33 @@ var hashorse = (function($) {
 
   var exports = {};
 
-  var error = {
-    stack: [],
-    has: function() {
-      if(this.stack.length === 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    print: function() {
-      if(this.has() === false) {
-        for(var i = 0; i < this.stack.length; i++) {
-          console.log(this.stack[i]);
-        }
-      } else {
-        console.log("no errors present");
-      }
-    }
-  };
-
   // EVENTS
   // ======================
 
-  $("#inputForm").on("submit", getInput);
+  $("#inputForm").on("submit", action);
 
   // HELPERS
   // ======================
 
   function init() {
     $("#inputMain").focus();
-    error.print();
   }
 
-  function getInput(evt) {
-
+  function action(evt) {
     evt.preventDefault();
+    var inputText = getInput();
+    var procArray = makeArray(inputText);
+    var outputString = makeNewString(procArray);
+    renderOutput(outputString);
+  }
+
+
+  /**
+   * Gets the string from the user and converts it into processing array
+   * @param {evt} jQuery evt object
+   * @return {arr} processing array
+   */
+  function getInput() {
 
     var $inputField = $("#inputMain");
 
@@ -57,15 +48,13 @@ var hashorse = (function($) {
     inputText = inputText.trim();
 
     if(!inputText.length < 1) {
-      parse(inputText);
       return inputText;
     } else {
-      error.stack.push("ERR1: no input");
-      error.print();
       return false;
     }
 
-  }
+  } // getInput()
+
 
   function renderOutput(text) {
     var $outputMain = $("#outputMain");
@@ -76,12 +65,78 @@ var hashorse = (function($) {
     $outputMain.append(htmlString);
   }
 
-  function parse(inputText) {
+  /**
+   * analyses the userInput against the tag identifier and returns an array of tags
+   * @param {arr} user input
+   * @return {arr} tags
+   */
+  function getTags(userInput) {
 
-    
-    
-    renderOutput(inputText);
-  }
+    var tags = [];
+
+    for(var i = 0; i < userInput.length; i++) {
+
+      switch(userInput[i][0]) {
+
+        case "#":
+          tags.push(userInput[i]);
+        break;
+
+        default:
+
+        break;
+
+      }
+
+    }
+
+    return tags;
+  } // getTags()
+
+
+  /**
+   * Converts the input string to an array
+   * @param {str} the inputText
+   * @return {arr} array with sliced string
+   */
+  function makeArray(inputText) {
+
+    var userInput = inputText.split(" ");
+
+    return userInput;
+  } //makeArray()
+
+
+  /**
+   * Converts the processing array back into a string including additional markup
+   * @param {arr} the processing array
+   * @return {str} string for display to user
+   */
+  function makeNewString(userInput) {
+
+    var newString = [];
+
+    for(var i = 0; i < userInput.length; i++) {
+
+      switch(userInput[i][0]) {
+
+        case "#":
+          newString.push("<a href='#'>" + userInput[i] + "</a>");
+        break;
+
+        default:
+          newString.push(userInput[i]);
+        break;
+
+      }
+
+    }
+
+    newString = newString.join(" ");
+
+    return newString;
+  } // makeNewString()
+
 
 
 
