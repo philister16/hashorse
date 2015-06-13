@@ -1,0 +1,25 @@
+{
+  "name": "hashorse",
+  "main": "hashorse.js",
+  "version": "0.1.0",
+  "authors": [
+    "Philipp Nueesch <phil@rhinerock.com>"
+  ],
+  "description": "Parser for Hashnotes",
+  "keywords": [
+    "hashnote",
+    "parser"
+  ],
+  "license": "MIT",
+  "homepage": "http://rhinerock.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}
